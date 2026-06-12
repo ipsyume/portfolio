@@ -2207,7 +2207,17 @@ img, canvas, svg, video { max-width: 100%; }
   .cb { max-width: 100%; }
   .pCard .pPreview, .pCard.feat .pPreview { height: 130px; }
 }
+
+<style>
+[data-theme="light"] #ghTicker{background:rgba(255,245,248,.92);border-color:rgba(244,114,160,.12);}
+[data-theme="light"] #ghTicker{color:rgba(100,70,130,.8);}
+nav{top:28px!important;}
+.hero{padding-top:calc(78px + 28px)!important;}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 </style>
+
+</head>
+<body>
 
 <!-- INLINE KAWAII SVG SYMBOLS -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -2388,9 +2398,6 @@ img, canvas, svg, video { max-width: 100%; }
 
 </svg>
 
-</head>
-<body>
-
 <!-- CURSORS -->
 <div id="CUR">
   <svg viewBox="0 0 24 24"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F472A0"/><stop offset="100%" stop-color="#9B7EE8"/></linearGradient></defs>
@@ -2462,13 +2469,6 @@ img, canvas, svg, video { max-width: 100%; }
   </div>
   <div id="ghTickerTrack" style="display:flex;align-items:center;gap:0;white-space:nowrap;will-change:transform;padding:0 .5rem;"></div>
 </div>
-<style>
-[data-theme="light"] #ghTicker{background:rgba(255,245,248,.92);border-color:rgba(244,114,160,.12);}
-[data-theme="light"] #ghTicker{color:rgba(100,70,130,.8);}
-nav{top:28px!important;}
-.hero{padding-top:calc(78px + 28px)!important;}
-@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-</style>
 
 <!-- MOBILE SLIDE PANEL -->
 <div id="mobilePanel">
@@ -2575,7 +2575,6 @@ nav{top:28px!important;}
       </div>
 
     </div>
-  </div>
   </div>
   <div class="scrollHint">
     <div class="sMouse"></div>
@@ -6675,4 +6674,17 @@ function closeDemoModal() {
   if (v) v.pause();
 }
 
-function handleDem
+function handleDemoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const area = document.getElementById('demoMediaArea');
+  if (file.type.startsWith('video')) {
+    area.innerHTML = `<video src="${url}" controls style="max-width:100%"></video>`;
+  } else {
+    area.innerHTML = `<img src="${url}" style="max-width:100%">`;
+  }
+}
+</script>
+</body>
+</html>
